@@ -1,0 +1,11 @@
+.article_list{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.article_card {
+    border: 1px solid black;
+    width: 250px;
+    height: 150px;
+}
