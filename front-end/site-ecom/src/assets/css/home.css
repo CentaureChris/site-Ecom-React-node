@@ -1,11 +1,17 @@
 .article_list{
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    /* align-items: center; */
 }
 
 .article_card {
     border: 1px solid black;
-    width: 250px;
+    flex-grow: 1;
+    width: 33%;
+    max-width: 33%;
     height: 150px;
+    margin-bottom: 5px;
 }

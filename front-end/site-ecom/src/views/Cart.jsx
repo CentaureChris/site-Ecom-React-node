@@ -15,24 +15,30 @@ const Cart = () => {
     };
 
     const cart = JSON.parse(localStorage.getItem('cart'))
-    const listArt = cart.map((art) =>
-        <div key={art.id} styles={styles.list}>
-            <a href={"/article/" + art.id + ""} className='article_body'>
-                <div style={styles.item}>
-                    <p>id:{art.id + ' ' + art.nom}</p>
-                    <p>{art.description}</p>
-                    <p>{art.prix} €</p>
-                    <p>{art.qty} </p>
-                    <button >Add to cart</button>
-                </div>
-            </a>
-        </div>
+    let listArt;
+    if(cart ){
+        listArt = cart.map((art) =>
+            <div key={art.id} styles={styles.list}>
+                <a href={"/article/" + art.id + ""} className='article_body'>
+                    <div style={styles.item}>
+                        <p>id:{art.id + ' ' + art.nom}</p>
+                        <p>{art.description}</p>
+                        <p>{art.prix} €</p>
+                        <p>{art.qty} </p>
+                    </div>
+                </a>
+            </div>
+        );
+    }else{
+        listArt = "Your cart is empty"
+    }
 
-    );
 
     return (
         <>
-            {listArt}
+            <div>
+                {listArt}
+            </div>
             <a href="/"><button>Valider le panier</button></a>
         </>
     )

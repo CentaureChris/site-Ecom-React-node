@@ -1,8 +1,12 @@
-ul {
+.navList {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 2%;
+}
+
+.navList > li {
+    list-style-type: none;
 }
 
 li {

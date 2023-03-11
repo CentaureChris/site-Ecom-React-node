@@ -8,10 +8,10 @@ import { useNavigate } from 'react-router-dom';
 
     const navigate = useNavigate();
 
-    async function submit(event){
+    const submit = async (event) =>{
         event.preventDefault();
         const res = await login({email,pass})
-        console.log(res)
+        // console.log(res)
         if(res.user){
             navigate('/')
         }else{

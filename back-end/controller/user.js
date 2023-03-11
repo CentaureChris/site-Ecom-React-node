@@ -5,6 +5,7 @@ async function getAllUser(req, res) {
     const users = await User.findAll();
     res.json(users)
 }
+
 async function addUser(req, res) {
     if (!req.body.email || !req.body.pass) {
         res.status(400).json({ mess: "Champs obligatoires : email et pass" })
@@ -18,9 +19,11 @@ async function addUser(req, res) {
         adresse: req.body.adresse,
         code_postal: req.body.code_postal,
         ville: req.body.ville,
+        niveau: 0,
     });
-    res.json(user)
+    res.json({user})
 }
+
 async function connectUser(req, res) {
     if (!req.body.email || !req.body.pass) {
         res.status(400).json({ mess: "Champs obligatoires : email et pass" })
