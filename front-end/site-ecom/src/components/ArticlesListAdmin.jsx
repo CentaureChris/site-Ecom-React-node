@@ -43,7 +43,7 @@ const ArticlesListAdmin = () => {
                 ? <>
                     <td>{item.nom}</td>
                     <td>{item.description}</td>
-                    <td>{item.prix}</td>
+                    <td>{item.prix} €</td>
                     <td>
                         <a href={"/article/edit/" + item.id + ""}><button type="button" >edit</button></a>
                         <button type="button" onClick={() => { deleteProd(item.id, token) }}>delete</button>

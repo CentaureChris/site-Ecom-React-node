@@ -1,27 +1,44 @@
 import '../assets/css/home.css'
+import React, { useContext } from "react";
+import { Context } from '../Context.js';
 
 const Home = (articles) => {
 
-    const addToCart =  (art) => {
+    const [context, setContext] = useContext(Context);
+
+    const getTotalCart = () => {
+        const cart = JSON.parse(localStorage.getItem('cart'))
+        let totalCart = 0
+        if (localStorage.getItem('cart')) {
+            cart.forEach(item => {
+                totalCart += item.qty
+            });
+        }
+        return totalCart
+    }
+
+    const addToCart = (art) => {
         const cart = localStorage.getItem("cart")
-        if(cart){
+        if (cart) {
             console.log(art)
             const newCart = JSON.parse(cart)
             let indexArt = newCart.findIndex(x => x.id === art.id)
             if (indexArt !== -1) {
                 newCart[indexArt].qty += 1
-                localStorage.setItem('cart',JSON.stringify(newCart))
-            }else{
-                art.qty = 1    
+                localStorage.setItem('cart', JSON.stringify(newCart))
+            } else {
+                art.qty = 1
                 newCart.push(art)
                 console.log(newCart)
-                localStorage.setItem('cart',JSON.stringify(newCart))
+                localStorage.setItem('cart', JSON.stringify(newCart))
             }
-        }else{
+        } else {
             art.qty = 1
             console.log(art)
-            localStorage.setItem("cart",JSON.stringify([art]))
+            localStorage.setItem("cart", JSON.stringify([art]))
         }
+        // window.location.reload()
+        setContext(getTotalCart)
     }
 
     const arts = articles.articles.map((art) =>
@@ -33,19 +50,19 @@ const Home = (articles) => {
                     <p>{art.prix} €</p>
                 </div>
             </a>
-            <button onClick={() => addToCart(art) }>Add to cart</button>
+            <button onClick={() => addToCart(art)}>Add to cart</button>
         </div>
     );
 
-    
 
-return (
-    <>
-        <div className='article_list'>
-            {arts}
-        </div>
-    </>
-);
+
+    return (
+        <>
+            <div className='article_list'>
+                {arts}
+            </div>
+        </>
+    );
 }
 
 export default Home;

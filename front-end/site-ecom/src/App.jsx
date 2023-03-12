@@ -1,12 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Context } from './Context.js';
 import Nav from "./components/Navbar";
 import Routes from "./route";
 import { callLoginApi, callDeleteArtApi, callAddUserApi } from "./utils/apiCalls"
 import './App.css'
 
 const App = () => {
+
+  const [context, setContext] = useState(0);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
   const token = localStorage.getItem('token')
+  // const [cartCount, setCartCount] = useState()
+
+  useEffect(() => {
+    setContext(getTotalCart())
+  }, [])
+
+
+  const getTotalCart = () => {
+    const cart = JSON.parse(localStorage.getItem('cart'))
+    let totalCart = 0
+    if (localStorage.getItem('cart')) {
+      cart.forEach(item => {
+        totalCart += item.qty
+      });
+    }
+    return totalCart
+  }
 
   const logout = () => {
     localStorage.removeItem('user')
@@ -56,12 +76,21 @@ const App = () => {
 
   return (
     <>
-      <Nav user={user} logout={logout} login={login} />
-      <Routes
-        login={login}
-        deleteArt={deleteArt}
-        register={register}
-      />
+      <Context.Provider value={[context, setContext]}>
+        <Nav
+          user={user}
+          logout={logout}
+          login={login}
+          // cartCount={cartCount}
+        />
+
+        <Routes
+          login={login}
+          deleteArt={deleteArt}
+          register={register}
+          // setCartCount={setCartCount}
+        />
+      </Context.Provider>
     </>
   )
 }

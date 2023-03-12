@@ -16,7 +16,7 @@ const [datas, setDatas] = useState([]);
 }, []);
 
   return (
-    <Home articles={datas}/>
+    <Home articles={datas} />
   );
 }
 

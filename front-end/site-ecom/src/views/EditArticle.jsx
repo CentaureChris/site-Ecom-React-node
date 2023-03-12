@@ -4,7 +4,6 @@ import { callEditArtApi } from "../utils/apiCalls"
 
 const EditArticle = () => {
 
-    const [datas, setDatas] = useState([]);
     var url = window.location.pathname;
     var id = url.substring(url.lastIndexOf('/') + 1);
     const [nom,setNom] = useState("")
@@ -15,14 +14,14 @@ const EditArticle = () => {
     const submit = async (event)=>{
         // console.log(token)
         event.preventDefault()
-        const res = callEditArtApi({token,id,nom,description,prix})
+        callEditArtApi({token,id,nom,description,prix})
+        alert('Vous avez modifié le produit')
     }
 
     useEffect(() => {
         fetch(`/api/article/${id}`)
             .then((response) => response.json())
             .then((data) => {
-                setDatas(data);
                 setNom(data.nom)
                 setDescription(data.description)
                 setPrix(data.prix)
