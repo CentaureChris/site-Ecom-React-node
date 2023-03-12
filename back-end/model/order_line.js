@@ -1,22 +1,26 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const { sequelize } = require('../data/index')
 
-const CommandeLine = sequelize.define('commande_line', {
+const OrderLine = sequelize.define('commande_line', {
     // Model attributes are defined here
     id_art: {
         type: DataTypes.NUMBER,
         allowNull: false
     },
-    id_comm: {
+    id_order: {
         type: DataTypes.NUMBER,
         allowNull: false
     },
-    qte: {
+    qty: {
         type: DataTypes.NUMBER
         // allowNull defaults to true
+    },
+    price: {
+        type: DataTypes.FLOAT
     }
+
 }, {
     // Other model options go here
 });
 
-module.exports = CommandeLine
+module.exports = OrderLine

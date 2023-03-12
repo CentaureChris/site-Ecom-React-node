@@ -69,3 +69,16 @@ export const callEditArtApi = async ({token,id,nom,description,prix}) => {
     })
     return res.json()
 }
+
+export const callApiCreateOrder = async ({token,id_user,amount,state}) => {
+    const res = await fetch(`/api/order/`,{
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + token
+        },
+        body: JSON.stringify({id_user,amount,state})
+    })
+    return res.json()
+}

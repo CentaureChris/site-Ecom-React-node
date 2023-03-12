@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Context } from './Context.js';
+import { CartContext } from './Context.js';
 import Nav from "./components/Navbar";
 import Routes from "./route";
 import { callLoginApi, callDeleteArtApi, callAddUserApi } from "./utils/apiCalls"
@@ -7,13 +7,13 @@ import './App.css'
 
 const App = () => {
 
-  const [context, setContext] = useState(0);
+  const [cartContext, setCartContext] = useState(0);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
   const token = localStorage.getItem('token')
   // const [cartCount, setCartCount] = useState()
 
   useEffect(() => {
-    setContext(getTotalCart())
+    setCartContext(getTotalCart())
   }, [])
 
 
@@ -76,7 +76,7 @@ const App = () => {
 
   return (
     <>
-      <Context.Provider value={[context, setContext]}>
+      <CartContext.Provider value={[cartContext, setCartContext]}>
         <Nav
           user={user}
           logout={logout}
@@ -90,7 +90,7 @@ const App = () => {
           register={register}
           // setCartCount={setCartCount}
         />
-      </Context.Provider>
+      </CartContext.Provider>
     </>
   )
 }

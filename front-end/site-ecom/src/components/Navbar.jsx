@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { Context } from "../Context.js";
+import { CartContext } from "../Context.js";
 import '../assets/css/nav.css';
 
 export default function Nav({ user, logout }) {
 
-  const [context, setContext] = useContext(Context);
+  const [cartContext, setCartContext] = useContext(CartContext);
   const styles = {
     main: {
       textAlign: 'right'
@@ -50,7 +50,7 @@ export default function Nav({ user, logout }) {
             :""
           }
           <a href={"/users/cart/"}>
-            <button style={styles.cartButton}>Panier ({context})</button>
+            <button style={styles.cartButton}>Panier ({cartContext})</button>
           </a>
           <LogButton />
         </li>

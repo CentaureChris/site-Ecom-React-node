@@ -1,3 +1,6 @@
+import React from "react"
+import { callApiCreateOrder } from "../utils/apiCalls"
+
 const Cart = () => {
 
     const styles = {
@@ -9,14 +12,34 @@ const Cart = () => {
         item: {
             border: "1px solid black",
             padding: "10px",
-            color: "red",
             margin: "5px"
         },
     };
 
     const cart = JSON.parse(localStorage.getItem('cart'))
+    const userdatas = JSON.parse(localStorage.getItem('user'))
+    const token = localStorage.getItem('token')
+
+    const totalCart = () => {
+        let total = 0
+        const cart = JSON.parse(localStorage.getItem('cart'))
+        cart.forEach(item => total += (item.qty * item.prix))
+        return total
+    }
+
+    const cartValidate = () => {
+
+        if(window.confirm('Valider la commande?')){
+            let amount = totalCart()
+            let state = 0
+            let id_user = userdatas.id
+            callApiCreateOrder({ token,id_user,amount,state })
+        }
+
+    }
+
     let listArt;
-    if(cart ){
+    if (cart) {
         listArt = cart.map((art) =>
             <div key={art.id} styles={styles.list}>
                 <a href={"/article/" + art.id + ""} className='article_body'>
@@ -29,17 +52,16 @@ const Cart = () => {
                 </a>
             </div>
         );
-    }else{
+    } else {
         listArt = "Your cart is empty"
     }
-
 
     return (
         <>
             <div>
                 {listArt}
             </div>
-            <a href="/"><button>Valider le panier</button></a>
+            <button type="button" onClick={() => { cartValidate() }}>Valider le panier</button>
         </>
     )
 }

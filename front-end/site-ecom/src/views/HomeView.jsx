@@ -1,10 +1,10 @@
 import '../assets/css/home.css'
 import React, { useContext } from "react";
-import { Context } from '../Context.js';
+import { CartContext } from '../Context.js';
 
 const Home = (articles) => {
 
-    const [context, setContext] = useContext(Context);
+    const [cartContext, setCartContext] = useContext(CartContext);
 
     const getTotalCart = () => {
         const cart = JSON.parse(localStorage.getItem('cart'))
@@ -20,7 +20,7 @@ const Home = (articles) => {
     const addToCart = (art) => {
         const cart = localStorage.getItem("cart")
         if (cart) {
-            console.log(art)
+            // console.log(art)
             const newCart = JSON.parse(cart)
             let indexArt = newCart.findIndex(x => x.id === art.id)
             if (indexArt !== -1) {
@@ -29,16 +29,16 @@ const Home = (articles) => {
             } else {
                 art.qty = 1
                 newCart.push(art)
-                console.log(newCart)
+                // console.log(newCart)
                 localStorage.setItem('cart', JSON.stringify(newCart))
             }
         } else {
             art.qty = 1
-            console.log(art)
+            // console.log(art)
             localStorage.setItem("cart", JSON.stringify([art]))
         }
         // window.location.reload()
-        setContext(getTotalCart)
+        setCartContext(getTotalCart)
     }
 
     const arts = articles.articles.map((art) =>

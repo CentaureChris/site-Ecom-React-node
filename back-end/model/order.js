@@ -1,17 +1,19 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const { sequelize } = require('../data/index')
 
-const Commande = sequelize.define('commande', {
+const Order = sequelize.define('order', {
     // Model attributes are defined here
     id_user: {
         type: DataTypes.NUMBER
     },
-    statut: {
-        type: DataTypes.STRING
-        // allowNull defaults to true
-    }
+    amount: {
+        type: DataTypes.REAL
+    },
+    state: {
+        type: DataTypes.NUMBER, 
+    },
 }, {
     // Other model options go here
 });
 
-module.exports = Commande
+module.exports = Order

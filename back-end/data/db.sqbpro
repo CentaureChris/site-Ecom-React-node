@@ -1,39 +1,77 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/recup/projets/Node/cours api ean2/data/db.sqlite" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1404"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,8:mainarticles"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE utilisateur(
-   id_user INTEGER,
-   email TEXT,
-   pass TEXT,
-   nom TEXT,
-   prenom TEXT,
-   adresse TEXT,
-   code_postal TEXT,
-   ville TEXT,
-   PRIMARY KEY(id_user),
-   UNIQUE(email)
-);
-
-CREATE TABLE articles(
-   id_article INTEGER,
-   nom TEXT,
-   description TEXT,
-   prix NUMERIC(10,2),
-   PRIMARY KEY(id_article)
-);
-
-CREATE TABLE commande(
-   id_comm INTEGER,
-   date_com NUMERIC,
-   statut TEXT,
-   id_user INTEGER NOT NULL,
-   PRIMARY KEY(id_comm),
-   FOREIGN KEY(id_user) REFERENCES utilisateur(id_user)
-);
-
-CREATE TABLE commande_ligne(
-   id_article INTEGER,
-   id_comm INTEGER,
-   qte INTEGER,
-   PRIMARY KEY(id_article, id_comm),
-   FOREIGN KEY(id_article) REFERENCES articles(id_article),
-   FOREIGN KEY(id_comm) REFERENCES commande(id_comm)
-);
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/recup/projets/Node/cours api ean2/data/db.sqlite" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1404"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,8:mainarticles"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE utilisateur(
+
+   user_id INTEGER,
+
+   email TEXT,
+
+   pass TEXT,
+
+   nom TEXT,
+
+   prenom TEXT,
+
+   adresse TEXT,
+
+   code_postal TEXT,
+
+   ville TEXT,
+
+   PRIMARY KEY(user_id),
+
+   UNIQUE(email)
+
+);
+
+
+
+CREATE TABLE articles(
+
+   id_article INTEGER,
+
+   nom TEXT,
+
+   description TEXT,
+
+   prix NUMERIC(10,2),
+
+   PRIMARY KEY(id_article)
+
+);
+
+
+
+CREATE TABLE commande(
+
+   id_comm INTEGER,
+
+   date_com NUMERIC,
+
+   statut TEXT,
+
+   user_id INTEGER NOT NULL,
+
+   PRIMARY KEY(id_comm),
+
+   FOREIGN KEY(user_id) REFERENCES utilisateur(user_id)
+
+);
+
+
+
+CREATE TABLE commande_ligne(
+
+   id_article INTEGER,
+
+   id_comm INTEGER,
+
+   qte INTEGER,
+
+   PRIMARY KEY(id_article, id_comm),
+
+   FOREIGN KEY(id_article) REFERENCES articles(id_article),
+
+   FOREIGN KEY(id_comm) REFERENCES commande(id_comm)
+
+);
+
 </sql><current_tab id="0"/></tab_sql></sqlb_project>

@@ -12,7 +12,7 @@ const Article = sequelize.define('article', {
         // allowNull defaults to true
     },
     prix: {
-        type: DataTypes.NUMBER
+        type: DataTypes.REAL
         // allowNull defaults to true
     },
     photo: {
