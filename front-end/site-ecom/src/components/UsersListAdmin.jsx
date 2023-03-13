@@ -37,7 +37,7 @@ const UsersListAdmin = (listItem) => {
 
     return (
         <>
-            <table>
+            <table className="table table-striped">
                 <thead>
                     <tr>
                         <th>Nom</th>

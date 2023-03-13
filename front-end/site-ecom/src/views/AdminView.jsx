@@ -20,10 +20,12 @@ const AdminView = () => {
 
     return (
         <>
-            <button onClick={() => displayUser()}>List User</button>
-            <button onClick={() => displayArt()}>List Articles</button>
-            {list === "articles" ? <ArticlesListAdmin /> : ""}
-            {list === "users" ? <UsersListAdmin  /> : ""}
+            <div className='text-center'>
+                <button className='btn btn-secondary m-2' onClick={() => displayUser()}>List User</button>
+                <button className='btn btn-secondary m-2' onClick={() => displayArt()}>List Articles</button>
+            </div>
+                {list === "articles" ? <ArticlesListAdmin /> : ""}
+                {list === "users" ? <UsersListAdmin /> : ""}
         </>
     )
 }

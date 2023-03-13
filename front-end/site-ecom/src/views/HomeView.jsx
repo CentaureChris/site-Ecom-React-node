@@ -42,15 +42,15 @@ const Home = (articles) => {
     }
 
     const arts = articles.articles.map((art) =>
-        <div className='article_card' key={art.id}>
+        <div className='article_card card' key={art.id}>
             <a href={"/article/" + art.id + ""} className='article_body'>
-                <div >
-                    <p>id:{art.id + ' ' + art.nom}</p>
-                    <p>{art.description}</p>
+                <div className='card-body'>
+                    <p className='card-title'>id:{art.id + ' ' + art.nom}</p>
+                    <p className='card-text'>{art.description}</p>
                     <p>{art.prix} €</p>
                 </div>
             </a>
-            <button onClick={() => addToCart(art)}>Add to cart</button>
+            <button className='btn btn-success btn-sm mx-5 my-2' onClick={() => addToCart(art)}>Add to cart</button>
         </div>
     );
 

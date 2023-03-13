@@ -24,13 +24,13 @@ export default function Nav({ user, logout }) {
     if (user) {
       return (
         <>
-          <button onClick={logout}>Logout</button>
+          <button onClick={logout} className="btn btn-danger">Logout</button>
         </>
       )
     } else {
       return (
         <>
-          <a href="/login">Login/register</a>
+          <a href="/login"><button className="btn btn-primary">Login/register</button></a>
         </>
       )
     }
@@ -50,7 +50,7 @@ export default function Nav({ user, logout }) {
             :""
           }
           <a href={"/users/cart/"}>
-            <button style={styles.cartButton}>Panier ({cartContext})</button>
+            <button style={styles.cartButton} className="btn btn-primary">Panier ({cartContext})</button>
           </a>
           <LogButton />
         </li>
