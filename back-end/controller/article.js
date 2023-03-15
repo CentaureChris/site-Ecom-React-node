@@ -5,29 +5,40 @@ async function getAllArticles(req, res) {
     const articles = await Article.findAll();
     res.json(articles)
 }
+
 async function getArticleById(req, res) {
     const article = await Article.findByPk(req.params.id);
     res.json(article)
 }
-async function addArticle(req, res) {
+
+async function addArticle(req, res, next) {  
+    console.log(req.body)
+
     if (!req.body.nom || !req.body.description || !req.body.prix) {
-        res.status(400).json({ mess: "Champs obligatoires : nom, description et prix" })
+        res.status(400).json({ mess: "Champs obligatoires : nom, description et prix"})
         return
     }
-    console.log(req.user)
     if (req.user.dataValues.niveau === 1) {
+        console.log(req.body)
         const article = await Article.create({
             nom: req.body.nom,
             description: req.body.description,
             prix: req.body.prix,
-            photo: req.body.photo
+            photo: req.file.filename
         });
         res.json(article)
     }
     else {
         res.status(403).json({ mess: "vous devez etre administrateur" })
     }
+
+    // if(req.file){
+    //     res.json({ message: "Successfully uploaded files" })
+    // }else {
+    //     res.json({ message: "Fail upload" })
+    // }
 }
+
 async function updateArticle(req, res) {
     if (!req.body.nom || !req.body.description || !req.body.prix) {
         res.status(400).json({ mess: "Champs obligatoires : nom, description et prix" })
@@ -47,6 +58,7 @@ async function updateArticle(req, res) {
         res.status(403).json({ mess: "vous devez etre administrateur" })
     }
 }
+
 async function deleteArticle(req, res) {
     if (req.user.dataValues.niveau === 1) {
 

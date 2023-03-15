@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const { sequelize } = require('../data/index')
+const { sequelize } = require('../data/index.js')
 
 const Article = sequelize.define('article', {
     // Model attributes are defined here
@@ -16,7 +16,7 @@ const Article = sequelize.define('article', {
         // allowNull defaults to true
     },
     photo: {
-        type: DataTypes.STRING
+        type: DataTypes.BLOB
     }
 }, {
     // Other model options go here

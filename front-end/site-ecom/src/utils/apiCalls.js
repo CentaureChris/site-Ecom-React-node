@@ -1,3 +1,5 @@
+import axios from "axios"
+
 export const callLoginApi = async ({ email, pass }) => {
     const res = await fetch("api/user/connect", {
         headers: {
@@ -10,75 +12,81 @@ export const callLoginApi = async ({ email, pass }) => {
     return res.json()
 }
 
-export const callAddUserApi = async({email,pass,nom,prenom,adresse,code_postal,ville}) => {
+export const callAddUserApi = async ({ email, pass, nom, prenom, adresse, code_postal, ville }) => {
     const res = await fetch("api/user", {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
         method: "POST",
-        body: JSON.stringify({ email, pass, nom, prenom, adresse, code_postal, ville})
+        body: JSON.stringify({ email, pass, nom, prenom, adresse, code_postal, ville })
     })
     return res.json()
 }
 
 export const getListArt = async () => {
-    return new Promise ((resolve,reject) => (
+    return new Promise((resolve, reject) => (
         fetch("/api/article")
             .then(response => response.json())
             .then(data => resolve(data))
             .catch(err => console.log(err.message))
-            ))
-        }
-        
-export const callDeleteArtApi = async ({id,token}) => {
-    const res = await fetch(`/api/article/${id}`,{
+    ))
+}
+
+export const callDeleteArtApi = async ({ id, token }) => {
+    const res = await fetch(`/api/article/${id}`, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': "Bearer " + token
         },
         method: "DELETE",
-        body: JSON.stringify({id})
+        body: JSON.stringify({ id })
     })
     return res.json()
 }
 
-export const callAddArtApi = async ({token,nom,description,prix}) => {
+export const callAddArtApi = async ({ token,photo }) => {
     const res = await fetch('/api/article',{
         method: "POST",
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
+            // 'Accept': 'application/json',
+            // 'Content-Type': 'application/json',
             'Authorization': "Bearer " + token
         },
-        body: JSON.stringify({nom,description,prix})
+        body: photo
     })
+    console.log(photo)
     return res.json()
+    // axios.post('/api/article', photo, {
+    //     headers: {
+    //         'Content-Type': 'multipart/form-data'
+    //     }
+    // })
 }
 
-export const callEditArtApi = async ({token,id,nom,description,prix}) => {
-    const res = await fetch(`/api/article/${id}`,{
+export const callEditArtApi = async ({ token, id, nom, description, prix }) => {
+    const res = await fetch(`/api/article/${id}`, {
         method: "PUT",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': "Bearer " + token
         },
-        body: JSON.stringify({nom,description,prix})
+        body: JSON.stringify({ nom, description, prix })
     })
     return res.json()
 }
 
-export const callApiCreateOrder = async ({token,id_user,amount,state}) => {
-    const res = await fetch(`/api/order/`,{
+export const callApiCreateOrder = async ({ token, id_user, amount, state }) => {
+    const res = await fetch(`/api/order/`, {
         method: "POST",
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Authorization': "Bearer " + token
         },
-        body: JSON.stringify({id_user,amount,state})
+        body: JSON.stringify({ id_user, amount, state })
     })
     return res.json()
 }

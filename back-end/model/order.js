@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const { sequelize } = require('../data/index')
+const { sequelize } = require('../data/index.js')
 
 const Order = sequelize.define('order', {
     // Model attributes are defined here
@@ -10,7 +10,7 @@ const Order = sequelize.define('order', {
         type: DataTypes.REAL
     },
     state: {
-        type: DataTypes.NUMBER, 
+        type: DataTypes.NUMBER,
     },
 }, {
     // Other model options go here

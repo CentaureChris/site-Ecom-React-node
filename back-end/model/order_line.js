@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const { sequelize } = require('../data/index')
+const { sequelize } = require('../data/index.js')
 
 const OrderLine = sequelize.define('commande_line', {
     // Model attributes are defined here

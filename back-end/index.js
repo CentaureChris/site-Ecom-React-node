@@ -11,8 +11,9 @@ const port = 3001;
     await sequelize.sync({ force: false });
     // Code here
 })();
-app.use(express.json())
 
+// app.use(express.static('./public'));
+app.use(express.json())
 app.use('/api/user', userRouter)
 app.use('/api/article', articleRouter)
 app.use('/api/order', orderRouter)
