@@ -27,30 +27,26 @@ const ArticlesListAdmin = () => {
     const submit = async (event) => {
         event.preventDefault()
         const formData = new FormData()
+        formData.append('nom', nom)
+        formData.append('description', description)
+        formData.append('prix', prix)
         formData.append('photo', photo,photo.name)
-        formData.set("nom",nom)
-        formData.set("description",description)
-        formData.set("prix",prix)
         setPhoto(formData)
         console.log(formData)
-        let testUpload = await(callAddArtApi({ token, photo}))
+        let testUpload = await(callAddArtApi({ token, formData}))
         console.log(testUpload)
         setDatas(await getListArt())
     }
 
     useEffect(() => {
-        // fetch("/api/article")
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         setDatas(data);
-        //     })
-        //     .catch((err) => {
-        //         console.log(err.message);
-        //     });
-        axios.get("/api/article")
-            .then((response) => {
-                setDatas(response.data)
+        fetch("/api/article")
+            .then((response) => response.json())
+            .then((data) => {
+                setDatas(data);
             })
+            .catch((err) => {
+                console.log(err.message);
+            });
     }, []);
 
     async function deleteProd(id) {
@@ -64,7 +60,7 @@ const ArticlesListAdmin = () => {
         <tr key={item.id}>
             {item !== []
                 ? <>
-                    <td><img src={item.photo} alt="product" style={styles.img} /></td>
+                    <td><img src={"/files/images/"+item.photo} alt="product" style={styles.img} /></td>
                     <td>{item.nom}</td>
                     <td>{item.description}</td>
                     <td>{item.prix} €</td>

@@ -4,7 +4,7 @@ import '../assets/css/nav.css';
 
 export default function Nav({ user, logout }) {
 
-  const [cartContext, setCartContext] = useContext(CartContext);
+  const [cartContext] = useContext(CartContext);
   const styles = {
     main: {
       textAlign: 'right'

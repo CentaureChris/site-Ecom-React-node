@@ -11,15 +11,13 @@ async function getArticleById(req, res) {
     res.json(article)
 }
 
-async function addArticle(req, res, next) {  
-    console.log(req.body)
-
+async function addArticle(req, res) {
+    console.log(req)
     if (!req.body.nom || !req.body.description || !req.body.prix) {
         res.status(400).json({ mess: "Champs obligatoires : nom, description et prix"})
         return
     }
     if (req.user.dataValues.niveau === 1) {
-        console.log(req.body)
         const article = await Article.create({
             nom: req.body.nom,
             description: req.body.description,
@@ -32,11 +30,11 @@ async function addArticle(req, res, next) {
         res.status(403).json({ mess: "vous devez etre administrateur" })
     }
 
-    // if(req.file){
-    //     res.json({ message: "Successfully uploaded files" })
-    // }else {
-    //     res.json({ message: "Fail upload" })
-    // }
+//     if(req.files){
+//         res.json({ message: "Successfully uploaded files" })
+//     }else {
+//         res.json({ message: "Fail upload" })
+//     }
 }
 
 async function updateArticle(req, res) {

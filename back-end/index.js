@@ -12,7 +12,7 @@ const port = 3001;
     // Code here
 })();
 
-// app.use(express.static('./public'));
+app.use(express.static('public'));
 app.use(express.json())
 app.use('/api/user', userRouter)
 app.use('/api/article', articleRouter)

@@ -46,7 +46,7 @@ export const callDeleteArtApi = async ({ id, token }) => {
     return res.json()
 }
 
-export const callAddArtApi = async ({ token,photo }) => {
+export const callAddArtApi = async ({ token, formData }) => {
     const res = await fetch('/api/article',{
         method: "POST",
         headers: {
@@ -54,15 +54,9 @@ export const callAddArtApi = async ({ token,photo }) => {
             // 'Content-Type': 'application/json',
             'Authorization': "Bearer " + token
         },
-        body: photo
+        body: formData
     })
-    console.log(photo)
     return res.json()
-    // axios.post('/api/article', photo, {
-    //     headers: {
-    //         'Content-Type': 'multipart/form-data'
-    //     }
-    // })
 }
 
 export const callEditArtApi = async ({ token, id, nom, description, prix }) => {

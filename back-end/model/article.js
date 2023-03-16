@@ -16,7 +16,7 @@ const Article = sequelize.define('article', {
         // allowNull defaults to true
     },
     photo: {
-        type: DataTypes.BLOB
+        type: DataTypes.STRING
     }
 }, {
     // Other model options go here
