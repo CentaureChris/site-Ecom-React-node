@@ -1,5 +1,8 @@
-import React from "react"
-import { callApiCreateOrder } from "../utils/apiCalls"
+import React, {useContext} from "react"
+import { useNavigate } from 'react-router-dom';
+import { callApiCreateOrder, callApiCreateOrderLine } from "../utils/apiCalls"
+import { CartContext } from '../Context.js';
+
 
 const Cart = () => {
 
@@ -19,6 +22,8 @@ const Cart = () => {
     const cart = JSON.parse(localStorage.getItem('cart'))
     const userdatas = JSON.parse(localStorage.getItem('user'))
     const token = localStorage.getItem('token')
+    const [cartContext, setCartContext] = useContext(CartContext);
+    const navigate = useNavigate();
 
     const totalCart = () => {
         let total = 0
@@ -27,15 +32,21 @@ const Cart = () => {
         return total
     }
 
-    const cartValidate = () => {
+    const cartValidate = async () => {
 
-        if(window.confirm('Valider la commande?')){
+        if (window.confirm('Valider la commande?')) {
             let amount = totalCart()
             let state = 0
             let id_user = userdatas.id
-            callApiCreateOrder({ token,id_user,amount,state })
-        }
+            const resOrder = await callApiCreateOrder({ token, id_user, amount, state })
 
+            cart.forEach(async (item) => {
+                await callApiCreateOrderLine(token, item.id, resOrder.id, item.prix, item.qty)
+            })
+            localStorage.setItem('cart',"")
+            setCartContext("0")
+            navigate('/')
+        }
     }
 
     let listArt;

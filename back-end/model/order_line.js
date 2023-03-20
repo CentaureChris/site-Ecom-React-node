@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const { sequelize } = require('../data/index.js')
 
-const OrderLine = sequelize.define('commande_line', {
+const OrderLine = sequelize.define('order_lines', {
     // Model attributes are defined here
     id_art: {
         type: DataTypes.NUMBER,

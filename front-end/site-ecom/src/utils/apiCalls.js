@@ -1,5 +1,3 @@
-import axios from "axios"
-
 export const callLoginApi = async ({ email, pass }) => {
     const res = await fetch("api/user/connect", {
         headers: {
@@ -81,6 +79,19 @@ export const callApiCreateOrder = async ({ token, id_user, amount, state }) => {
             'Authorization': "Bearer " + token
         },
         body: JSON.stringify({ id_user, amount, state })
+    })
+    return res.json()
+}
+
+export const callApiCreateOrderLine = async (token,id_art,id_order,price,qty) => {
+    const res = await fetch(`/api/order_line/`,{
+        method:"POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + token
+        },
+        body: JSON.stringify({id_art,id_order,price,qty})
     })
     return res.json()
 }

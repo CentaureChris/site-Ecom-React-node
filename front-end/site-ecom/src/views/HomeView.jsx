@@ -37,7 +37,6 @@ const Home = (articles) => {
             // console.log(art)
             localStorage.setItem("cart", JSON.stringify([art]))
         }
-        // window.location.reload()
         setCartContext(getTotalCart)
     }
 
