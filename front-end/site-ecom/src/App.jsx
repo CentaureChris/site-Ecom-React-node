@@ -3,6 +3,7 @@ import { CartContext } from './Context.js';
 import Nav from "./components/Navbar";
 import Routes from "./route";
 import { callLoginApi, callDeleteArtApi, callAddUserApi } from "./utils/apiCalls"
+
 import './App.css'
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
   const [cartContext, setCartContext] = useState(0);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
   const token = localStorage.getItem('token')
+
   // const [cartCount, setCartCount] = useState()
 
   useEffect(() => {
@@ -18,14 +20,16 @@ const App = () => {
 
 
   const getTotalCart = () => {
-    const cart = JSON.parse(localStorage.getItem('cart'))
-    let totalCart = 0
-    if (localStorage.getItem('cart')) {
-      cart.forEach(item => {
-        totalCart += item.qty
-      });
+    if(localStorage.getItem('cart')){
+      const cart = JSON.parse(localStorage.getItem('cart'))
+      let totalCart = 0
+      if (localStorage.getItem('cart')) {
+        cart.forEach(item => {
+          totalCart += item.qty
+        });
+      }
+      return totalCart
     }
-    return totalCart
   }
 
   const logout = () => {
@@ -65,7 +69,6 @@ const App = () => {
   }
 
   const deleteArt = async ({ id }) => {
-
     try {
       const data = await callDeleteArtApi({ id, token })
       return data.mess
@@ -88,7 +91,6 @@ const App = () => {
           login={login}
           deleteArt={deleteArt}
           register={register}
-          // setCartCount={setCartCount}
         />
       </CartContext.Provider>
     </>

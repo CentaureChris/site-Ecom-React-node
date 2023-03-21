@@ -7,9 +7,12 @@ import ArticleDet from './views/ArticleDet';
 import Cart from './views/Cart';
 import AdminView from "./views/AdminView";
 import EditArticle from "./views/EditArticle";
+import SuccessPayment from "./views/SuccessPayment";
+import FailPayment from "./views/FailPayment";
+import Payment from './components/Payment.jsx';
 
 
-const Routes = ({ login, deleteArt, register }) => {
+const Routes = ({ login, deleteArt, register, stripePromise, options }) => {
   const router = createBrowserRouter([
     {
       path: "/",
@@ -49,8 +52,22 @@ const Routes = ({ login, deleteArt, register }) => {
     {
       path: "/admin",
       element: <AdminView />,
-    }
+    },
 
+    {
+      path: "/success",
+      element: <SuccessPayment />,
+    },
+
+    {
+      path: "/failed",
+      element: <FailPayment />,
+    },
+
+     {
+      path: "/stripe",
+      element: <Payment />,
+    }
   ]);
 
   return (

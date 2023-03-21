@@ -7,7 +7,6 @@ multer = require('multer')
 let pathParentDir = __dirname.split('/')
 pathParentDir.pop()
 pathParentDir = pathParentDir.join('/')+"/public/files/images"
-console.log(pathParentDir)
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, pathParentDir);
