@@ -43,9 +43,9 @@ const Cart = () => {
             cart.forEach(async (item) => {
                 await callApiCreateOrderLine(token, item.id, resOrder.id, item.prix, item.qty)
             })
-            localStorage.setItem('cart',"")
+            // localStorage.setItem('cart',"")
             setCartContext("0")
-            navigate('/')
+            navigate('/stripe')
         }
     }
 

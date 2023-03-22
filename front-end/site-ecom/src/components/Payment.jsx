@@ -8,6 +8,13 @@ function Payment() {
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
 
+  const totalCart = () => {
+    let total = 0
+    const cart = JSON.parse(localStorage.getItem('cart'))
+    cart.forEach(item => total += (item.qty * item.prix))
+    return total*100
+}
+
   useEffect(() => {
     fetch("/config").then(async (r) => {
       const { publishableKey } = await r.json();
@@ -16,9 +23,14 @@ function Payment() {
   }, []);
 
   useEffect(() => {
+    let payAmount = totalCart()
     fetch("/create-payment-intent", {
       method: "POST",
-      body: JSON.stringify({}),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    },
+      body: JSON.stringify({payAmount}),
     }).then(async (result) => {
       var { clientSecret } = await result.json();
       setClientSecret(clientSecret);
