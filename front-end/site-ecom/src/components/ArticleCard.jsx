@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import styles from "../assets/css/articleCard.module.css";
 
 const ArticleCard = ({ article, deleteArt }) => {
     
@@ -21,7 +22,8 @@ const ArticleCard = ({ article, deleteArt }) => {
     }  
     return (
         <>
-            <div>
+            {/* <div>
+                <img src={"/files/images/" + article.datas.photo} alt="" />
                 <p>id: {article.datas.id}</p>
                 <p>nom: {article.datas.nom}</p>
                 <p>prix: {article.datas.prix}</p>
@@ -29,6 +31,25 @@ const ArticleCard = ({ article, deleteArt }) => {
             <div>
                 <button>Add to Cart</button>
                 <button onClick={()=>{deleteProd(idArt)}}>Delete</button>
+            </div> */}
+            <div className="main">
+                <ul className={styles.cards}>
+                    <li className={styles.cards_item}>
+                    <div className={styles.card} tabIndex="0">
+                        <div className={styles.card_image}><img src={"/files/images/" + article.datas.photo} alt={article.datas.photo} /></div>
+                        <div className={styles.card_content}>
+                        <h2 className={styles.card_title}>{article.datas.nom} {article.datas.prix}</h2>
+                        <div className={styles.card_text}>
+                            <p>{article.datas.description}</p>
+                        </div>
+                        </div>
+                    </div>
+                    </li>
+                </ul>
+                <div>
+                    <button>Add to Cart</button>
+                    <button onClick={()=>{deleteProd(idArt)}}>Delete</button>
+                </div> 
             </div>
         </>
     )

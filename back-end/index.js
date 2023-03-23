@@ -4,6 +4,7 @@ const articleRouter = require('./router/article');
 const userRouter = require('./router/user')
 const orderRouter = require('./router/order')
 const orderLineRouter = require('./router/order_line')
+const auth = require('./middleware/auth')
 
 const stripe = require('stripe')('sk_test_51MoC00AAUAQGM3dyqLAJ7tgc05c32onteMPyI2SO2MaYQCHdwra8YuGB5h4jhC7CCSy7HYTN5s8JwFDyhzTNubpz00R02oxhOz');
 

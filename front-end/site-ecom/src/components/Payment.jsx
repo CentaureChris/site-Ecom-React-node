@@ -7,6 +7,7 @@ import { loadStripe } from "@stripe/stripe-js";
 function Payment() {
   const [stripePromise, setStripePromise] = useState(null);
   const [clientSecret, setClientSecret] = useState("");
+  const [montant, setMontant] = useState()
 
   const totalCart = () => {
     let total = 0
@@ -23,7 +24,8 @@ function Payment() {
   }, []);
 
   useEffect(() => {
-    let payAmount = totalCart()
+    setMontant(totalCart())
+    let payAmount = montant
     fetch("/create-payment-intent", {
       method: "POST",
       headers: {
@@ -35,11 +37,12 @@ function Payment() {
       var { clientSecret } = await result.json();
       setClientSecret(clientSecret);
     });
-  }, []);
+  }, [montant]);
 
   return (
     <>
       <h1>React Stripe and the Payment Element</h1>
+      <h1>Votre panier contient un total de {montant/100}€</h1>
       {clientSecret && stripePromise && (
         <Elements stripe={stripePromise} options={{ clientSecret }}>
           <CheckoutForm /> 

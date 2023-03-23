@@ -1,4 +1,4 @@
-import React, {useContext} from "react"
+import React, {useContext,useState} from "react"
 import { useNavigate } from 'react-router-dom';
 import { callApiCreateOrder, callApiCreateOrderLine } from "../utils/apiCalls"
 import { CartContext } from '../Context.js';
@@ -19,10 +19,10 @@ const Cart = () => {
         },
     };
 
-    const cart = JSON.parse(localStorage.getItem('cart'))
+    const [cart,setCart] = useState(localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):"")
     const userdatas = JSON.parse(localStorage.getItem('user'))
     const token = localStorage.getItem('token')
-    const [cartContext, setCartContext] = useContext(CartContext);
+    const [setCartContext] = useContext(CartContext);
     const navigate = useNavigate();
 
     const totalCart = () => {
@@ -49,6 +49,12 @@ const Cart = () => {
         }
     }
 
+    const cartEmpty = () => {
+        localStorage.setItem('cart', "")
+        setCart(localStorage.getItem('cart'))
+        setCartContext(0)
+    }
+
     let listArt;
     if (cart) {
         listArt = cart.map((art) =>
@@ -73,6 +79,7 @@ const Cart = () => {
                 {listArt}
             </div>
             <button type="button" onClick={() => { cartValidate() }}>Valider le panier</button>
+            <button type="button" className="btn btn-warning" onClick={() => { cartEmpty() }}>Vider le panier</button>
         </>
     )
 }
