@@ -1,36 +1,27 @@
 import React, { useContext } from 'react';
 import { CartContext } from "../Context.js";
-import '../assets/css/nav.css';
+import classe from '../assets/css/nav.module.css';
+import hero from '../assets/images/hero.jpeg'
+import { FaCartPlus } from "react-icons/fa";
 
 export default function Nav({ user, logout }) {
 
   const [cartContext] = useContext(CartContext);
-  const styles = {
-    main: {
-      textAlign: 'right'
-    },
-    cartButton: {
-      marginRight: '25px'
-    },
-    userLogedIn: {
-      textAlign: 'right',
-      marginRight: '25px'
-    }
-  }
 
-  
+
+
   const LogButton = () => {
 
     if (user) {
       return (
         <>
-          <button onClick={logout} className="btn btn-danger">Logout</button>
+          <span onClick={logout} className="">Logout</span>
         </>
       )
     } else {
       return (
         <>
-          <a href="/login"><button className="btn btn-primary">Login/register</button></a>
+          <a href="/login"><button className="">Login/register</button></a>
         </>
       )
     }
@@ -39,22 +30,27 @@ export default function Nav({ user, logout }) {
 
   return (
     <>
+      <nav className={classe.navMenu}>
+        <ul className={classe.menu}>
+          <li><a href="/">Home</a></li>
+          <li>
+            {
+              user && user.niveau === 1
+                ? <a href="/admin" >Dashboard</a>
+                : ""
+            }
+
+          </li>
+          <li className={classe.userNavItem}>
+            {user ? <p className='userLogged'>{user.nom} {user.prenom}</p> : ""} ..
+            <a href={"/users/cart/"}className=""><FaCartPlus />({cartContext})</a>..
+
+            <LogButton />
+          </li>
+        </ul>
+      </nav>
+      <img src={hero} class="hero_img" alt="hero" className="hero"/>
       
-      {user ? <p style={styles.userLogedIn}>{user.nom} {user.prenom}</p>:""}
-      <ul className='navList'>
-        <li><a href="/">Home</a></li>
-        <li>
-          {
-            user && user.niveau === 1  
-            ? <a href="/admin" style={styles.cartButton}>Dashboard</a> 
-            :""
-          }
-          <a href={"/users/cart/"}>
-            <button style={styles.cartButton} className="btn btn-primary">Panier ({cartContext})</button>
-          </a>
-          <LogButton />
-        </li>
-      </ul>
     </>
   );
 }

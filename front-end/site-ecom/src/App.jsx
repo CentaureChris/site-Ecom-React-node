@@ -91,6 +91,7 @@ const App = () => {
           login={login}
           deleteArt={deleteArt}
           register={register}
+          user={user}
         />
       </CartContext.Provider>
     </>

@@ -11,7 +11,7 @@ import SuccessPayment from "./views/SuccessPayment";
 import Payment from './components/Payment.jsx';
 
 
-const Routes = ({ login, deleteArt, register, stripePromise, options }) => {
+const Routes = ({ login, deleteArt, register, user,stripePromise, options }) => {
   const router = createBrowserRouter([
     {
       path: "/",
@@ -20,7 +20,7 @@ const Routes = ({ login, deleteArt, register, stripePromise, options }) => {
 
     {
       path: "/article/:id",
-      element: <ArticleDet deleteArt={deleteArt} />,
+      element: <ArticleDet deleteArt={deleteArt}  />,
     },
 
     {

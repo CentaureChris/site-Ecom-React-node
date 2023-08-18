@@ -4,6 +4,7 @@ import styles from "../assets/css/articleCard.module.css";
 const ArticleCard = ({ article, deleteArt }) => {
     
     const token = localStorage.getItem('token')
+    const user = JSON.parse(localStorage.getItem('user'))
     var url = window.location.pathname;
     const idArt = url.substring(url.lastIndexOf('/') + 1);
     const navigate = useNavigate();
@@ -36,7 +37,7 @@ const ArticleCard = ({ article, deleteArt }) => {
                 <ul className={styles.cards}>
                     <li className={styles.cards_item}>
                     <div className={styles.card} tabIndex="0">
-                        <div className={styles.card_image}><img src={"/files/images/" + article.datas.photo} alt={article.datas.photo} /></div>
+                        <div className={styles.card_img_div} ><img src={"/files/images/" + article.datas.photo} alt={article.datas.photo} /></div>
                         <div className={styles.card_content}>
                         <h2 className={styles.card_title}>{article.datas.nom} {article.datas.prix}</h2>
                         <div className={styles.card_text}>
@@ -47,8 +48,8 @@ const ArticleCard = ({ article, deleteArt }) => {
                     </li>
                 </ul>
                 <div>
-                    <button>Add to Cart</button>
-                    <button onClick={()=>{deleteProd(idArt)}}>Delete</button>
+                    <button class = "btn btn-success ">Add to Cart</button>    
+                    {user.niveau === 1 ? <button  class="delete_button" onClick={()=>{deleteProd(idArt)}}>Delete</button> : ""} 
                 </div> 
             </div>
         </>

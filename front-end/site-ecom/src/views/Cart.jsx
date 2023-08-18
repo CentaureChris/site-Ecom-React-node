@@ -22,7 +22,7 @@ const Cart = () => {
     const [cart,setCart] = useState(localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):"")
     const userdatas = JSON.parse(localStorage.getItem('user'))
     const token = localStorage.getItem('token')
-    const [setCartContext] = useContext(CartContext);
+    const [cartContext, setCartContext] = useContext(CartContext);
     const navigate = useNavigate();
 
     const totalCart = () => {
@@ -44,7 +44,7 @@ const Cart = () => {
                 await callApiCreateOrderLine(token, item.id, resOrder.id, item.prix, item.qty)
             })
             // localStorage.setItem('cart',"")
-            setCartContext("0")
+            setCartContext(0)
             navigate('/stripe')
         }
     }

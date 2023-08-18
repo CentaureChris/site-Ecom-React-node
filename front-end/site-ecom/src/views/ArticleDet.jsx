@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import ArticleCard from '../components/ArticleCard';
+// import ArticleCard from '../components/ArticleCard';
+import ArticleDetail from '../components/ArticleDetail';
 
 const ArticleDet = ({ deleteArt }) => {
     const [datas, setDatas] = useState([]);
@@ -19,7 +20,7 @@ const ArticleDet = ({ deleteArt }) => {
 
     return (
         <>
-            <ArticleCard article={{ datas }} deleteArt={{ deleteArt }} />
+            <ArticleDetail article={{ datas }} deleteArt={{ deleteArt }} />
         </>
     );
 }

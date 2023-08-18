@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
+import classe from '../assets/css/paymentForm.module.css'
 
 function Payment() {
   const [stripePromise, setStripePromise] = useState(null);
@@ -44,7 +45,7 @@ function Payment() {
       <h1>React Stripe and the Payment Element</h1>
       <h1>Votre panier contient un total de {montant/100}€</h1>
       {clientSecret && stripePromise && (
-        <Elements stripe={stripePromise} options={{ clientSecret }}>
+        <Elements stripe={stripePromise} options={{ clientSecret }} >
           <CheckoutForm /> 
         </Elements>
       )}
